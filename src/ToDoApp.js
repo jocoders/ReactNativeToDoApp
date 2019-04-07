@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import AddToDo from './containers/AddToDo'
-import VisibleTodos from './containers/VisibleTodos'
 
 export default class ToDoApp extends Component<Props> {
   state = {
@@ -13,9 +12,6 @@ export default class ToDoApp extends Component<Props> {
     return (
       <View style={styles.container}>
         <AddToDo />
-        <View>
-          <VisibleTodos />
-        </View>
       </View>
     );
   }
@@ -23,7 +19,7 @@ export default class ToDoApp extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    flex: 1,
     paddingTop: 40
   },
   welcome: {

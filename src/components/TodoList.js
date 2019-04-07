@@ -1,24 +1,59 @@
 import React from 'react'
-import { TouchableOpacity, Text, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const TodoList = ({ todos, toggleTodo }) => {
+  const { container, subContainer, toDoContainer } = styles
   return (
-    <View style={{ padding: 20 }}>
+    <View style={container}>
       {todos.map((todo) => 
-        <TouchableOpacity
+        <View 
           key={todo.id}
-          onPress={() => toggleTodo(todo.id)}
+          style={subContainer}
         >
-          <Text style={{
-            fontSize: 24,
-            textDecorationLine: todo.completed ? 'line-through' : 'none' }}
+          <TouchableOpacity
+            onPress={() => toggleTodo(todo.id)}
+            style={toDoContainer}
           >
-            {todo.text}
-          </Text>
-        </TouchableOpacity>
+            <Ionicons
+              name="ios-checkmark"
+              style={{paddingRight: 5}}
+              size={40}
+            />
+            <Text style={{
+              fontSize: 24,
+              textDecorationLine: todo.completed ? 'line-through' : 'none' }}
+            >
+              {todo.text}
+            </Text>
+          </TouchableOpacity>
+          <View>
+            <TouchableOpacity>
+              <Ionicons
+                size={24}
+                name="ios-close-circle-outline"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
       )}
     </View>
   )
-}   
+}
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10
+  },
+  subContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  toDoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
+})
 
 export default TodoList

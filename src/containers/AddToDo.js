@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 import { Header, ToDoInput } from '../components'
 
+import VisibleTodos from './VisibleTodos'
+
 class AddToDo extends Component {
   state = {
     text: ''
@@ -22,8 +24,10 @@ class AddToDo extends Component {
           headerText="MY DAY TO-DO"
         />
         <View
-          style={{ flex: 10, backgroundColor: 'green' }}
-        />
+          style={{ flex: 10 }}
+        >
+          <VisibleTodos />
+        </View>
         <ToDoInput
           style={{ flex: 1 }}
           text={this.state.text}

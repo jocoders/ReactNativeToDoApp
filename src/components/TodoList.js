@@ -1,34 +1,55 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import { TouchableOpacity, FlatList, StyleSheet, Text, View } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const TodoList = ({ todos, toggleTodo }) => {
+const TodoList = ({ todos, toggleTodo, deleteTodo }) => {
   const { container, subContainer, toDoContainer } = styles
+  const separator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '100%',
+          backgroundColor: '#CED0CE'
+        }}
+      />
+    )
+  }
+  console.log('todos', todos)
   return (
-    <View style={container}>
-      {todos.map((todo) => 
+    <FlatList
+      data={todos}
+      keyExtractor={item => item.id.toString()}
+      itemSeparatorComponent={separator}
+      renderItem={({ item }) => (
         <View 
-          key={todo.id}
-          style={subContainer}
+          key={item.id}
+          style={container}
         >
-          <TouchableOpacity
-            onPress={() => toggleTodo(todo.id)}
-            style={toDoContainer}
-          >
+          <View style={{ flex: 1 }}>
             <Ionicons
               name="ios-checkmark"
-              style={{paddingRight: 5}}
+              style={{ paddingLeft: 10, color: '#0099ff' }}
               size={40}
             />
-            <Text style={{
-              fontSize: 24,
-              textDecorationLine: todo.completed ? 'line-through' : 'none' }}
+          </View>
+          <View style={{ flex: 8 }}>
+            <TouchableOpacity
+              onPress={() => toggleTodo(item.id)}
+              style={subContainer}
             >
-              {todo.text}
-            </Text>
-          </TouchableOpacity>
-          <View>
-            <TouchableOpacity>
+              <Text style={{
+                fontSize: 24,
+                textDecorationLine: item.completed ? 'line-through' : 'none' }}
+              >
+                {item.text}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              onPress={() => deleteTodo(item.id)}
+            >
               <Ionicons
                 size={24}
                 name="ios-close-circle-outline"
@@ -37,23 +58,20 @@ const TodoList = ({ todos, toggleTodo }) => {
           </View>
         </View>
       )}
-    </View>
+    />
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
-  },
-  subContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    //backgroundColor: '#ffa500'
   },
-  toDoContainer: {
+  subContainer: {
     flexDirection: 'row',
     alignItems: 'center'
   }
 })
 
-export default TodoList
+export { TodoList }

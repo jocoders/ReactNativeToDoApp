@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text, TextInput, View } from 'react-native'
+import { TouchableOpacity, ImageBackground, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 import { Header, ToDoInput } from '../components'
@@ -26,7 +26,13 @@ class AddToDo extends Component {
         <View
           style={{ flex: 10 }}
         >
-          <VisibleTodos />
+          <ImageBackground
+            source={require('../images/rawpixel-584298-unsplash-min.jpg')}
+            style={{ width: '100%', height: '100%' }}
+            resizeMode="cover"
+          >
+            <VisibleTodos />
+          </ImageBackground>
         </View>
         <ToDoInput
           style={{ flex: 1 }}

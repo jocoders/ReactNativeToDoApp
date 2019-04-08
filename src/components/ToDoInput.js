@@ -1,10 +1,14 @@
 import React from 'react'
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, KeyboardAvoidingView, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 const ToDoInput = (props) => {
   const { container, textInput, subContainer, textStyle } = styles
   return (
-    <View style={container}>
+    <KeyboardAvoidingView 
+      style={container}
+      behavior="padding"
+      keyboardVerticalOffset={40}
+    >
       <TextInput
         value={props.text}
         onChangeText={props.onChangeText}
@@ -18,20 +22,19 @@ const ToDoInput = (props) => {
           <Text style={textStyle}>Add</Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    //bottom: 0,
-    //position: 'absolute'
+    paddingBottom: 60
   },
   subContainer: {
     height: 80,
     width: 50,
-    backgroundColor: '#ff336b',
+    backgroundColor: '#0099ff',
     alignItems: 'center',
     justifyContent: 'center'
   },
